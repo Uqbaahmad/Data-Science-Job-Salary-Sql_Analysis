@@ -58,7 +58,6 @@ SELECT COUNT(DISTINCT job_title) AS no_of_job FROM ds_salariess;
   <img width="125" height="100" src="https://user-images.githubusercontent.com/104266403/208470726-af03756d-6342-4fe7-a610-9e11b035c548.png">
 </p>
 
-**Answer**: 50 job titles
 ### 2. Which experience level has the highest salary?
 I used the CASE Statement to separate the experience level into different categories of Mid-level, senior-level, entry-level, and executive-level. I used the Count function to count the number of jobs that belonged to each of the category. I used the Max function to find the highest salary and the Round function to round up the numbers to two decimal places so as to make it readable. I grouped by the Case statements and ordered by highest_salary in descending order to get the highest salary.
 
