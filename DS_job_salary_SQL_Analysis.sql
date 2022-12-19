@@ -36,8 +36,13 @@ GROUP BY CASE WHEN employment_type = 'FT' THEN 'Full time'
             ELSE NULL END
 ORDER BY highest_salary DESC;
 
--- highest salary per job title in USD
+-- average salary per job title in USD
 SELECT job_title, ROUND(AVG(salary_in_usd), 2) AS Average_salary FROM  ds_salariess
+GROUP BY job_title
+ORDER BY average_salary DESC;
+
+-- highest salary per job title in USD
+SELECT job_title, ROUND(MAX(salary_in_usd), 2) AS Average_salary FROM  ds_salariess
 GROUP BY job_title
 ORDER BY average_salary DESC;
 
