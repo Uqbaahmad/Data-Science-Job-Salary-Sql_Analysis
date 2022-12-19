@@ -39,7 +39,45 @@ In the project, I used the following SQL functions: **SELECT, FROM, WHERE, CASE 
 
 * Before I began the analysis, I needed to confirm that my dataset had been properly imported from Excel. I used the SELECT and asterisk functions to confirm it.
 
-![Screenshot (206)](https://user-images.githubusercontent.com/104266403/208470135-6e4ebc55-39b0-4ed7-9236-558431f4ab19.png)
+```
+SELECT * FROM data_science_job.ds_salariess;
+```
 
 ![Screenshot (202)](https://user-images.githubusercontent.com/104266403/208464792-1dc59879-af94-4a1c-a53c-a465b77c6eb0.png)
-![Screenshot (207)](https://user-images.githubusercontent.com/104266403/208470726-af03756d-6342-4fe7-a610-9e11b035c548.png)
+
+```
+USE data_science_job;
+```
+
+### 1. How many job title was included in the dataset?
+I used the COUNT function together with DISTINCT so as to get unique job_titles and to avoid duplicates in the course of the count.
+```
+SELECT COUNT(DISTINCT job_title) AS no_of_job FROM ds_salariess;
+```
+<p align="center">
+  <img width="125" height="100" src="https://user-images.githubusercontent.com/104266403/208470726-af03756d-6342-4fe7-a610-9e11b035c548.png">
+</p>
+
+**Answer**: 50 job titles
+### 2. Which experience level has the highest salary?
+I used the CASE Statement to separate the experience level into different categories of Mid-level, senior-level, entry-level, and executive-level. I used the Count function to count the number of jobs that belonged to each of the category. I used the Max function to find the highest salary and the Round function to round up the numbers to two decimal places so as to make it readable. I grouped by the Case statements and ordered by highest_salary in descending order to get the highest salary.
+
+```
+SELECT CASE WHEN experience_level = 'MI' THEN 'Mid level'
+            WHEN experience_level = 'SE' THEN 'Senior level'
+            WHEN experience_level = 'EN' THEN 'Entry level'
+            WHEN experience_level = 'EX' THEN 'Executive level'
+            ELSE NULL END AS experience_category, count(1) AS no_of_category, 
+            ROUND(MAX(salary_in_usd), 2) AS highest_salary            
+FROM data_science_job.ds_salariess 
+GROUP BY CASE WHEN experience_level = 'MI' THEN 'Mid level'
+            WHEN experience_level = 'SE' THEN 'Senior level'
+            WHEN experience_level = 'EN' THEN 'Entry level'
+            WHEN experience_level = 'EX' THEN 'Executive level'
+            ELSE NULL END
+ORDER BY highest_salary DESC
+```
+<p align="center">
+  <img width="400" height="50" src="https://user-images.githubusercontent.com/104266403/208496362-794479c2-c324-4105-877a-88a787e50b88.png">
+</p>
+
