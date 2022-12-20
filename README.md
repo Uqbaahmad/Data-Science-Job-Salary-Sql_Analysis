@@ -80,3 +80,79 @@ ORDER BY highest_salary DESC
   <img width="400" height="50" src="https://user-images.githubusercontent.com/104266403/208496362-794479c2-c324-4105-877a-88a787e50b88.png">
 </p>
 
+### 3. Does the employment type affect salary?
+I used the CASE Statement to separate the employment type into different categories: full-time, part-time, freelance, and contract. I used the Count function to count the number of jobs that belong to each category. I used the Average function to find the average salary per category and the Round function to round up the numbers to two decimal places so as to make it readable. I grouped by the Case statements and ordered by average_salary in descending order to get the result of the arranged in descending order
+
+
+```
+SELECT CASE WHEN experience_level = 'MI' THEN 'Mid level'
+            WHEN experience_level = 'SE' THEN 'Senior level'
+            WHEN experience_level = 'EN' THEN 'Entry level'
+            WHEN experience_level = 'EX' THEN 'Executive level'
+            ELSE NULL END AS experience_category, count(1),
+            ROUND(AVG(salary_in_usd), 2) AS highest_salary            
+FROM data_science_job.ds_salariess 
+GROUP BY CASE WHEN experience_level = 'MI' THEN 'Mid level'
+            WHEN experience_level = 'SE' THEN 'Senior level'
+            WHEN experience_level = 'EN' THEN 'Entry level'
+            WHEN experience_level = 'EX' THEN 'Executive level'
+            ELSE NULL END
+ORDER BY highest_salary DESC ;
+```
+<p align="center">
+  <img width="296" height="113" src="https://user-images.githubusercontent.com/104266403/208595703-a8819dc7-e355-4504-bb74-664ffc44826a.png">
+</p>
+
+Contract staff get paid more on the average
+
+### 4. What is the average salary per job title in USD?
+I used the Average function to get the average salary per job title in USD. I used the Round function to round up the numbers to two decimal places so as to make it readable. I grouped by job title and ordered by the average salary in descending order.
+```
+SELECT job_title, ROUND(AVG(salary_in_usd), 2) AS Average_salary FROM  ds_salariess
+GROUP BY job_title
+ORDER BY average_salary DESC;
+```
+<p align="center">
+  <img width="313" height="496" src="https://user-images.githubusercontent.com/104266403/208596554-73e9f29c-e029-43b6-8ec7-ddad0840dfb5.png">
+</p>
+
+### 5. What is the highest salary per job title in USD?
+I used the Max function to get the highest salary in USD. I used the round function to round up the numbers to two decimal place so as to make it readable. I grouped by job_title and ordered by the highest salary in descending order.
+```
+SELECT job_title, ROUND(MAX(salary_in_usd), 2) AS Average_salary FROM  ds_salariess
+GROUP BY job_title
+ORDER BY average_salary DESC;
+```
+
+<p align="center">
+  <img width="378" height="220" src="https://user-images.githubusercontent.com/104266403/208598452-9aee559a-29db-4a08-a093-a5ab29443667.png">
+</p>
+Principal Data Engineer at $600,000
+
+### 6. What is the highest paying entry-level data science job?
+ I used the Max function to get the highest salary in USD. I used the where function to filter the result and only return max salary for entry level. I grouped by job_title and ordered by the highest salary in descending order.
+
+```
+SELECT job_title, MAX(salary_in_usd) AS highest_salary
+FROM ds_salariess
+WHERE experience_level = 'EN'
+GROUP BY job_title
+ORDER BY highest_salary DESC;
+```
+
+<p align="center">
+  <img width="364" height="280" src="https://user-images.githubusercontent.com/104266403/208597200-609be970-daca-4d16-a966-aad8a6e1e1ce.png">
+</p>
+
+Machine Learning Engineer at $250,000 (That’s a substantial entry-level salary)
+
+### 7. What is the highest paying mid-level data science job?
+ I used the Max function to get the highest salary in USD. I used where function to filter the result and only return max salary for mid-level. I grouped by job_title and ordered by the highest salary in descending order.
+ ```
+SELECT job_title, MAX(salary_in_usd) AS highest_salary
+FROM ds_salariess
+WHERE experience_level = 'MI'
+GROUP BY job_title
+ORDER BY highest_salary DESC;
+```
+
