@@ -11,8 +11,8 @@ SELECT CASE WHEN experience_level = 'MI' THEN 'Mid level'
             WHEN experience_level = 'SE' THEN 'Senior level'
             WHEN experience_level = 'EN' THEN 'Entry level'
             WHEN experience_level = 'EX' THEN 'Executive level'
-            ELSE NULL END AS experience_category, count(1) AS no_of_category, 
-            ROUND(MAX(salary_in_usd), 2) AS highest_salary            
+            ELSE NULL END AS experience_category, count(1),
+            ROUND(AVG(salary_in_usd), 2) AS highest_salary            
 FROM data_science_job.ds_salariess 
 GROUP BY CASE WHEN experience_level = 'MI' THEN 'Mid level'
             WHEN experience_level = 'SE' THEN 'Senior level'
@@ -80,7 +80,7 @@ SELECT CASE WHEN experience_level = 'MI' THEN 'Mid level'
             WHEN experience_level = 'EN' THEN 'Entry level'
             WHEN experience_level = 'EX' THEN 'Executive level'
             ELSE NULL END AS experience_category,
-            ROUND(MAX(salary_in_usd), 2) AS highest_salary            
+            ROUND(AVG(salary_in_usd), 2) AS highest_salary            
 FROM data_science_job.ds_salariess 
 GROUP BY CASE WHEN experience_level = 'MI' THEN 'Mid level'
             WHEN experience_level = 'SE' THEN 'Senior level'
