@@ -2,6 +2,8 @@
 This repository demonstrates some common analysis and techniques using MySQL. For purpose of illustration the 
 [Data Science Job Salary](https://www.kaggle.com/datasets/ruchi798/data-science-job-salaries) dataset has been taken from kaggle
 
+This file contains analysis performed upon Data Science Job Salary dataset - [DS_job_salary_SQL_Analysis.sql](https://github.com/Uqbaahmad/Data-Science-Job-Salary-Sql_Analysis/blob/main/DS_job_salary_SQL_Analysis.sql) 
+
 # Data Understanding and Cleaning
 ### STEP 1: Import the data into Excel
 There were 11 columns and 608 rows in this dataset. It comprises the work year column, the experience level column, the employment type,
@@ -144,7 +146,7 @@ ORDER BY highest_salary DESC;
   <img width="364" height="280" src="https://user-images.githubusercontent.com/104266403/208597200-609be970-daca-4d16-a966-aad8a6e1e1ce.png">
 </p>
 
-Machine Learning Engineer at $250,000 (That’s a substantial entry-level salary)
+The  highest salary at the entry level is that of a Machine Learning Engineer is $250,000 (That’s a substantial entry-level salary)
 
 ### 7. What is the highest paying mid-level data science job?
  I used the Max function to get the highest salary in USD. I used where function to filter the result and only return max salary for mid-level. I grouped by job_title and ordered by the highest salary in descending order.
@@ -155,4 +157,159 @@ WHERE experience_level = 'MI'
 GROUP BY job_title
 ORDER BY highest_salary DESC;
 ```
+<p align="center">
+  <img width="396" height="134" src="https://user-images.githubusercontent.com/104266403/208716054-9b82dd4c-c3c9-4eae-9db4-46afac78e8e0.png">
+</p>
+Financial Data Analyst and Research Scientist are same salary $450,000
 
+### 8. What is the highest paying senior-level data science job?
+I used the Max function to get the highest salary in USD. I used where function to filter the result and only return max salary for senior-level. I grouped by job_title and ordered by the highest salary in descending order.
+
+ ```
+SELECT job_title, MAX(salary_in_usd) AS highest_salary
+FROM ds_salariess
+WHERE experience_level = 'SE'
+GROUP BY job_title
+ORDER BY highest_salary DESC;
+```
+<p align="center">
+  <img width="324" height="197" src="https://user-images.githubusercontent.com/104266403/208714979-7102562f-088e-409a-bdc2-dbc9d428fbcd.png">
+</p>
+
+### 9. What is the highest paying Executive level data science job?
+I used the Max function to get the highest salary in USD. I used where function to filter the result and only return max salary for executive-level. I grouped by job_title and ordered by the highest salary in descending order.
+
+```
+SELECT job_title, MAX(salary_in_usd) AS highest_salary
+FROM ds_salariess
+WHERE experience_level = 'EX'
+GROUP BY job_title
+ORDER BY highest_salary DESC;
+```
+<p align="center">
+  <img width="309" height="155" src="https://user-images.githubusercontent.com/104266403/208713715-39c59da3-8000-4ac6-90f0-4403aafd6e27.png">
+</p>
+
+Principal Data Engineer at $600,000 (Huge!)
+
+### 10. What is the average salary per experience level?
+
+I used the CASE Statement to separate the experience level into different categories: mid-level, senior-level, entry-level, and executive-level. I used the Count function to count the number of jobs that belonged to each category. I used the Average function to find the average salary per category and the Round function to round up the numbers to two decimal places so as to make it readable. I grouped by the Case statements and ordered by average_salary in descending order to get the result arranged in descending order.
+
+```
+SELECT CASE WHEN experience_level = 'MI' THEN 'Mid level'
+            WHEN experience_level = 'SE' THEN 'Senior level'
+            WHEN experience_level = 'EN' THEN 'Entry level'
+            WHEN experience_level = 'EX' THEN 'Executive level'
+            ELSE NULL END AS experience_category,
+            ROUND(AVG(salary_in_usd), 2) AS highest_salary            
+FROM data_science_job.ds_salariess 
+GROUP BY CASE WHEN experience_level = 'MI' THEN 'Mid level'
+            WHEN experience_level = 'SE' THEN 'Senior level'
+            WHEN experience_level = 'EN' THEN 'Entry level'
+            WHEN experience_level = 'EX' THEN 'Executive level'
+            ELSE NULL END
+ORDER BY highest_salary DESC ; 
+```
+<p align="center">
+  <img width="293" height="114" src="https://user-images.githubusercontent.com/104266403/208714410-962d3af1-0e5c-423d-9cf1-54f02f7e7fe9.png">
+</p>
+
+### 11. What is the lowest paying entry-level data science job?
+I used the Min function to get the lowest salary in USD. I used the where function to filter the result and only return the lowest salary for entry-level. I grouped by job_title and ordered by the lowest salary.
+
+```
+SELECT MIN(salary_in_usd) AS lowest_salary, job_title
+FROM ds_salariess
+WHERE experience_level = 'EN'
+GROUP BY job_title
+ORDER BY lowest_salary; 
+```
+<p align="center">
+  <img width="318" height="50" src="https://user-images.githubusercontent.com/104266403/208710325-65c40dfe-623d-48ce-af37-52afd2836ef2.png">
+</p>
+At entry-level Data Scientist lowest salary is about $4000.
+
+### 12. What is the lowest paying Mid-level Data Science Job?
+
+I used the Min function to get the lowest salary in USD. I used the where function to filter the result and only return the lowest salary for mid-level. I grouped by job_title and ordered by the lowest salary.
+```
+SELECT MIN(salary_in_usd) AS lowest_salary, job_title
+FROM ds_salariess
+WHERE experience_level = 'MI'
+GROUP BY job_title
+ORDER BY lowest_salary;
+```
+<p align="center">
+  <img width="338" height="46" src="https://user-images.githubusercontent.com/104266403/208709328-dc939332-aa91-49bb-aed3-f480e56aff71.png">
+</p>
+
+
+At mid-level Data Scientist lowest salary is about $2859.
+
+### 13. What is the lowest paying Senior level data science job?
+```
+SELECT MIN(salary_in_usd) AS lowest_salary, job_title
+FROM ds_salariess
+WHERE experience_level = 'SE'
+GROUP BY job_title
+ORDER BY lowest_salary;
+```
+<p align="center">
+  <img width="318" height="48" src="https://user-images.githubusercontent.com/104266403/208708827-3f405933-4c31-4716-a046-265199695ff8.png">
+</p>
+ Computer Vision Engineer at $18,907
+ 
+### 14. What is the lowest paying Executive level data science job?
+
+I used the Min function to get the lowest salary in USD. I used the where function to filter the result and only return the lowest salary for the executive level. I grouped by job_title and ordered by the lowest salary.
+
+```
+SELECT MIN(salary_in_usd) AS lowest_salary, job_title
+FROM ds_salariess
+WHERE experience_level = 'EX'
+GROUP BY job_title
+ORDER BY lowest_salary;
+```
+<p align="center">
+  <img width="315" height="49" src="https://user-images.githubusercontent.com/104266403/208708028-d720a8f9-2c80-4489-94af-b694a8cd53c4.png">
+</p>
+
+Data Science Consultant at $69,741
+
+
+### 15. Does company size affect salary?
+I used the CASE Statement to separate the company into different categories of a large, medium, and small companies. I used the Min and Max function to find the lowest and highest salary per company category and the Round function to round up the numbers to two decimal places so as to make it readable. I grouped them by the Case statements.<br/>
+
+*Note -I used the Min and Max function here instead of Average because Averages are susceptible to outliers. Using average will not give us the right insight into how much companies pay.*
+
+```
+SELECT job_title, MAX(salary_in_usd) AS highest_salary
+FROM ds_salariess
+WHERE experience_level = 'EX'
+GROUP BY job_title
+ORDER BY highest_salary DESC;
+``` 
+<p align="center">
+  <img width="335" height="91" src="https://user-images.githubusercontent.com/104266403/208706977-128f62a4-1546-435a-bf45-0baf1c174937.png">
+</p>
+Yes, it does. Large companies tend to pay more
+
+### 16. Does company location affect Salary?
+
+I used the CASE Statement to separate the company location into Companies in the US and Companies not in the US. I used the Min and Max function to find the lowest and highest salary per location category and the Round function to round up the numbers to two decimal places so as to make it readable. I grouped them by the Case statements.
+```
+SELECT job_title, MAX(salary_in_usd) AS highest_salary
+FROM ds_salariess
+WHERE experience_level = 'EX'
+GROUP BY job_title
+ORDER BY highest_salary DESC;
+```
+<p align="center">
+  <img width="370" height="71" src="https://user-images.githubusercontent.com/104266403/208706237-811fa9e9-4735-4925-8a07-0c81a345ad56.png">
+</p>
+
+Yes, it does. Companies in the US tend to pay more.
+
+# Insights
+From the above analysis, it can be concluded that companies in the US tend to pay more than their counterpart in other countries. 
