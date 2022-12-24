@@ -19,7 +19,7 @@ of the former (US Dollars)
 ### STEP 2: Importing the data to SQL
 For this analysis, I used MySQL Workbench. For the most part of this analysis, I will be working with the salary_in_usd column for the sake of uniformity.
 
-In the project, I used the following SQL functions: **SELECT, FROM, WHERE, CASE STATEMENT, WINDOW CLAUSE, CTE, GROUP BY, ORDER BY, MAX, MIN, AVERAGE, ROUND, etc.**
+In the project, I used the following SQL functions: **SELECT, FROM, WHERE, CASE STATEMENT, CTE, GROUP BY, ORDER BY, MAX, MIN, AVERAGE, ROUND, etc.**
 
 # Analysis is about answering questions. Let's define some questions :
 1. How many job title was included in the dataset?
@@ -175,6 +175,7 @@ ORDER BY highest_salary DESC;
 <p align="center">
   <img width="324" height="197" src="https://user-images.githubusercontent.com/104266403/208714979-7102562f-088e-409a-bdc2-dbc9d428fbcd.png">
 </p>
+Data Scientist at $412,000 (Isn’t it surprising that some Mid-level roles get paid more than Senior-level roles?)
 
 ### 9. What is the highest paying Executive level data science job?
 I used the Max function to get the highest salary in USD. I used where function to filter the result and only return max salary for executive-level. I grouped by job_title and ordered by the highest salary in descending order.
@@ -228,7 +229,7 @@ ORDER BY lowest_salary;
 <p align="center">
   <img width="318" height="50" src="https://user-images.githubusercontent.com/104266403/208710325-65c40dfe-623d-48ce-af37-52afd2836ef2.png">
 </p>
-At entry-level Data Scientist lowest salary is about $4000.
+At entry-level Data Scientist lowest salary is about $4000 (This is ridiculously low. An outlier maybe!).
 
 ### 12. What is the lowest paying Mid-level Data Science Job?
 
