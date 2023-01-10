@@ -19,7 +19,7 @@ of the former (US Dollars)
 ### STEP 2: Importing the data to SQL
 For this analysis, I used MySQL Workbench. For the most part of this analysis, I will be working with the salary_in_usd column for the sake of uniformity.
 
-In the project, I used the following SQL functions: **SELECT, FROM, WHERE, CASE STATEMENT, CTE, GROUP BY, ORDER BY, MAX, MIN, AVERAGE, ROUND, etc.**
+In the project, I used the following SQL functions: **SELECT, FROM, WHERE, CASE STATEMENT, GROUP BY, ORDER BY, MAX, MIN, AVERAGE, ROUND, etc.**
 
 # Analysis is about answering questions. Let's define some questions :
 1. How many job title was included in the dataset?
